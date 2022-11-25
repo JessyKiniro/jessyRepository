@@ -19,8 +19,86 @@ redis 存储的是：key,value 格式的数据，其中 key 都是字符串，va
 
 ### 字符串(String)
 
-> SET key "abc"
->
-> GET key
+```JAVA
+set key value //存储  重复会覆盖旧值
+
+get key //获取
+
+del key //删除  返回值 是被删除 key 的数量
+
+mset key1 value2 key2 value2  //批量设置
+
+mget key1 key2 //批量获取
+
+```
 
 ### Hash(哈希)
+
+Redis hash 是一个 String 类型的 field (字段) 和 value（值）得映射表，hash 特别适合用于存储对象，Redis 中每个 hash 可以存储 40 多亿键值对
+
+```java
+
+//**************************//
+
+hset key field value   //存储 一次只能操作一对key value
+
+hset myhash name "jessy"
+
+hset myhash age 25
+
+
+//********************//
+
+hget key field //获取指定的field对应的值
+
+hget myhash name
+
+//***************** //
+
+hgetall key //获取所有的field和value
+
+hgetall myhash
+
+hdel key field   //删除 只能删除一个filed-value
+
+//***************************//
+
+hmset key field1 value1 filed2
+
+hmset myhash name "lucy" age 26 sex female
+
+```
+
+### 列表类型 list
+
+可以添加一个元素到列表的头部（左边）或者尾部（右边）支持重复元素
+
+```JAVA
+
+lpush key value //将元素加入列表左边
+
+rpush key value //将元素加入列表右边
+
+lrange key start end //范围获取
+
+lrange list 0 4
+
+
+llen list//获取长度
+
+lpop key //删除列表最左边的元素，并将元素返回
+
+lpop list
+
+rpop key //删除列表最右边元素，并将元素返回
+
+rpop key
+
+lindex key value //查询下标对应的value
+
+lindex list 3
+
+
+```
+
+### Set 集合类型 不允许重复元素
