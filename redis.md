@@ -102,3 +102,74 @@ lindex list 3
 ```
 
 ### Set 集合类型 不允许重复元素
+
+```JAVA
+
+sadd key value //存储
+
+smembers key //获得set集合中的所有元素
+
+screm key value //删除set集合中的某个元素
+
+sismember key value  //查询value是否存在
+
+scard key //获取长度
+
+```
+
+### 有序集合类型 Zset
+
+不允许重复元素，且元素有顺序。每个元素都会关联一个 double 类型分数。redis 正是通过分数来为集合中的成员进行从小到大的排序
+
+```JAVA
+
+zadd key score value //存储
+
+ zadd mysort 60 zhangsan
+
+ zadd mysort 50 lisi
+
+ zadd mysort 80 wangwu
+
+zrange key start end [withscores]  //获取
+
+zrange mysort 0 3 withscores
+
+zrem key value  //删除
+
+zrem mysort lisi
+
+
+```
+
+### redis 其它常用命令
+
+1. 查询所有的键
+
+> keys pattern
+> eg: key \*
+>
+> - \* 代表匹配任意字符
+> - ? 代表匹配一个字符
+> - [] 代表匹配部分字符，例如[1,3]代表匹配 1 和 3，而[1-10]代表匹配 1 到 10 的任意数字。
+> - x 转移字符，例如要匹配星号，问号需要转义的字符
+
+2. 查询键对应的 value 类型
+
+> type key
+
+3. 删除指定的 key value
+
+> del key
+
+4. 设置过期时间
+
+> expire key time (time 以秒为单位)
+
+5. 查看过期时间
+
+> ttl key (单位为秒，-1 表示永久)
+
+### 分布式锁
+
+### redis 事务
